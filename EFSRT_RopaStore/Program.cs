@@ -1,3 +1,6 @@
+using EFSRT_RopaStore.Repositorio.Interface;
+using EFSRT_RopaStore.Repositorio.RepositorioSQL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
