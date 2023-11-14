@@ -1,5 +1,6 @@
 ﻿using EFSRT_RopaStore.Repositorio.Interface;
 using Microsoft.AspNetCore.Mvc;
+using RopaStore.Domain.Entidad;
 
 namespace EFSRT_RopaStore.Controllers
 {
@@ -13,7 +14,46 @@ namespace EFSRT_RopaStore.Controllers
         {
             ViewBag.nom = nom;
 
+            if (nom == null)
+                return View(await Task.Run(() => _proveedor.GetProveedores()));
             return View(await Task.Run(() => _proveedor.GetProveedores(nom)));
+        }
+
+
+        public async Task<IActionResult> Create()
+        {
+            return View(await Task.Run(() => new Proveedor()));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Proveedor reg)
+        {
+            ViewBag.mensaje = _proveedor.InsertProveedor(reg);
+            return View(await Task.Run(() => reg));
+        }
+
+        public async Task<IActionResult> Edit(string id = "")
+        {
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("list");
+            Proveedor reg = _proveedor.GetProveedor(id);
+            return View(await Task.Run(() => reg));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Proveedor reg)
+        {
+            ViewBag.mensaje = _proveedor.UpdateProveedor(reg);
+            return View(await Task.Run(() => reg));
+
+        }
+
+        public ActionResult Delete(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("list");
+            _proveedor.DeleteProveedor(_proveedor.GetProveedor(id));
+            return RedirectToAction("list");
         }
     }
 }

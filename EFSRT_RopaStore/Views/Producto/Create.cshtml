@@ -1,0 +1,77 @@
+﻿@model RopaStore.Domain.Entidad.Producto
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h4>Registrar producto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="idproducto" class="control-label"></label>
+                <input asp-for="idproducto" class="form-control" />
+                <span asp-validation-for="idproducto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idtipopro" class="control-label"></label>
+                <input asp-for="idtipopro" class="form-control" />
+                <span asp-validation-for="idtipopro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idproveedor" class="control-label"></label>
+                <input asp-for="idproveedor" class="form-control" />
+                <span asp-validation-for="idproveedor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nombre" class="control-label"></label>
+                <input asp-for="nombre" class="form-control" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cantidad" class="control-label"></label>
+                <input asp-for="cantidad" class="form-control" />
+                <span asp-validation-for="cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="precio" class="control-label"></label>
+                <input asp-for="precio" class="form-control" />
+                <span asp-validation-for="precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="stockmin" class="control-label"></label>
+                <input asp-for="stockmin" class="form-control" />
+                <span asp-validation-for="stockmin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="stockmax" class="control-label"></label>
+                <input asp-for="stockmax" class="form-control" />
+                <span asp-validation-for="stockmax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idlote" class="control-label"></label>
+                <input asp-for="idlote" class="form-control" />
+                <span asp-validation-for="idlote" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="estado" /> @Html.DisplayNameFor(model => model.estado)
+                </label>
+            </div>
+            <div class="form-group">
+                <a asp-action="Create" class="btn btn-primary">Limpiar</a>
+                <input type="submit" value="Crear" class="btn btn-primary" />
+                <a asp-action="Cliente" class="btn btn-success">Retornar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @ViewBag.mensaje
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

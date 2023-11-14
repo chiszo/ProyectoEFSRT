@@ -1,0 +1,94 @@
+﻿@model IEnumerable<RopaStore.Domain.Entidad.Producto>
+
+@{
+    ViewData["Title"] = "list";
+}
+
+<h1>Listado de productos</h1>
+
+<form>
+    <em>Nombre a filtrar</em>
+    @Html.TextBox("nom")
+    <button>Consultar</button>
+</form>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idproducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idtipopro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idproveedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stockmin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stockmax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idlote)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idproducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idtipopro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idproveedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stockmin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stockmax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idlote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.idproducto}) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.idproducto}, new { onclick = "return confirm('¿Está seguro que desea eliminar este registro?')" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

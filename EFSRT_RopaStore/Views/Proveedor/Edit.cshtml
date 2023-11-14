@@ -1,0 +1,64 @@
+﻿@model RopaStore.Domain.Entidad.Proveedor
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Actualizar Proveedor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="idproveedor" class="control-label"></label>
+                <input asp-for="idproveedor" class="form-control" />
+                <span asp-validation-for="idproveedor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefono" class="control-label"></label>
+                <input asp-for="telefono" class="form-control" />
+                <span asp-validation-for="telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="direccion" class="control-label"></label>
+                <input asp-for="direccion" class="form-control" />
+                <span asp-validation-for="direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="empresa" class="control-label"></label>
+                <input asp-for="empresa" class="form-control" />
+                <span asp-validation-for="empresa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ruc" class="control-label"></label>
+                <input asp-for="ruc" class="form-control" />
+                <span asp-validation-for="ruc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="correo" class="control-label"></label>
+                <input asp-for="correo" class="form-control" />
+                <span asp-validation-for="correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="representante" class="control-label"></label>
+                <input asp-for="representante" class="form-control" />
+                <span asp-validation-for="representante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Actualizar" class="btn btn-default" onclick="return alert('Se ha actualizado un registro')" />
+                    @Html.ActionLink("Retornar", "list", null, new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @ViewBag.mensaje
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,77 @@
+﻿@model RopaStore.Domain.Entidad.Trabajador
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h4>Registrar trabajador</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="idtrabajador" class="control-label"></label>
+                <input asp-for="idtrabajador" class="form-control" />
+                <span asp-validation-for="idtrabajador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nombre" class="control-label"></label>
+                <input asp-for="nombre" class="form-control" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="apellido" class="control-label"></label>
+                <input asp-for="apellido" class="form-control" />
+                <span asp-validation-for="apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dni" class="control-label"></label>
+                <input asp-for="dni" class="form-control" />
+                <span asp-validation-for="dni" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefono" class="control-label"></label>
+                <input asp-for="telefono" class="form-control" />
+                <span asp-validation-for="telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="correo" class="control-label"></label>
+                <input asp-for="correo" class="form-control" />
+                <span asp-validation-for="correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="direccion" class="control-label"></label>
+                <input asp-for="direccion" class="form-control" />
+                <span asp-validation-for="direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idcargo" class="control-label"></label>
+                <input asp-for="idcargo" class="form-control" />
+                <span asp-validation-for="idcargo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idarea" class="control-label"></label>
+                <input asp-for="idarea" class="form-control" />
+                <span asp-validation-for="idarea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="clave" class="control-label"></label>
+                <input asp-for="clave" class="form-control" />
+                <span asp-validation-for="clave" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a asp-action="Create" class="btn btn-primary">Limpiar</a>
+                <input type="submit" value="Crear" class="btn btn-primary" />
+                <a asp-action="Cliente" class="btn btn-success">Retornar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @ViewBag.mensaje
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
