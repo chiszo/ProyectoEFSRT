@@ -42,10 +42,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.idarea)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.clave)
-            </th>
+            </th
             <th></th>
         </tr>
     </thead>
@@ -78,9 +75,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.idarea)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.clave)
             </td>
             <td>
                     @Html.ActionLink("Actualizar", "Edit", new { id=item.idtrabajador},new {@class="btn btn-secondary"}) |

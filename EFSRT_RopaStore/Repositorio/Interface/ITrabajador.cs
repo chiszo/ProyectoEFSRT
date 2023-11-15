@@ -10,5 +10,6 @@ namespace EFSRT_RopaStore.Repositorio.Interface
         string UpdateTrabajador(Trabajador reg);
         string DeleteTrabajador(Trabajador reg);
         Trabajador GetTrabajador(string idtrabajador);
+        Trabajador GetUsuario(string correo);
     }
 }

@@ -82,6 +82,15 @@ namespace EFSRT_RopaStore.Repositorio.RepositorioSQL
             return GetTrabajadores().Where(x=>x.nombre.StartsWith(nombre, StringComparison.CurrentCultureIgnoreCase));
         }
 
+        public Trabajador GetUsuario(string correo)
+        {
+            if (string.IsNullOrEmpty(correo))
+                return new Trabajador();
+            else
+                return GetTrabajadores().FirstOrDefault(x => x.correo == correo);
+        }
+
+
         public string InsertTrabajador(Trabajador reg)
         {
             string mensaje = "";

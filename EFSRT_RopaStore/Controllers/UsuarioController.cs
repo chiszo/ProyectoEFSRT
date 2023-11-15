@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using EFSRT_RopaStore.Recursos;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -39,7 +40,7 @@ namespace EFSRT_RopaStore.Controllers
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@correo", t.correo);
-                        cmd.Parameters.AddWithValue("@clave", t.clave);
+                        cmd.Parameters.AddWithValue("@clave", Utilidades.EncriptarClave(t.clave));
                         con.Open();
                         SqlDataReader dr = cmd.ExecuteReader();
                         while (dr.Read())
@@ -48,7 +49,8 @@ namespace EFSRT_RopaStore.Controllers
                             {
                                 List<Claim> c = new List<Claim>()
                                 {
-                                    new Claim(ClaimTypes.NameIdentifier, t.correo)
+                                    new Claim(ClaimTypes.Name,t.correo),
+
                                 };
                                 ClaimsIdentity ci = new(c, CookieAuthenticationDefaults.AuthenticationScheme);
                                 AuthenticationProperties p = new();
@@ -68,10 +70,11 @@ namespace EFSRT_RopaStore.Controllers
                                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(ci), p);
                                 return RedirectToAction("Index", "Home");
                             }
-                            else
+                            else 
                             {
-                                ViewBag.Error = "Credenciales incorrectas o cuenta no registrada";
+                                ViewBag.Error = "Credenciales incorrectas o cuenta no registrda";
                             }
+
                         }
                         con.Close();
                     }
@@ -88,7 +91,7 @@ namespace EFSRT_RopaStore.Controllers
         [ResponseCache(Duration =0,Location =ResponseCacheLocation.None, NoStore =true)]
         public IActionResult Error()
         { 
-            return View("Error"); 
+            return View("Error","Home"); 
         
         }
     }

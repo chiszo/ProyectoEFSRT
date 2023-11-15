@@ -1,4 +1,5 @@
-﻿using EFSRT_RopaStore.Repositorio.Interface;
+﻿using EFSRT_RopaStore.Recursos;
+using EFSRT_RopaStore.Repositorio.Interface;
 using EFSRT_RopaStore.Repositorio.RepositorioSQL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -55,6 +56,7 @@ namespace EFSRT_RopaStore.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Trabajador reg)
         {
+            reg.clave=Utilidades.EncriptarClave(reg.clave);
             ViewBag.area = new SelectList(_area.listado(), "idarea", "descripcion");
             ViewBag.cargo = new SelectList(_cargo.listado(), "idcargo", "descripcion");
             ViewBag.mensaje = _trabajador.InsertTrabajador(reg);
@@ -74,6 +76,7 @@ namespace EFSRT_RopaStore.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Trabajador reg)
         {
+            reg.clave = Utilidades.EncriptarClave(reg.clave);
             ViewBag.area = new SelectList(_area.listado(), "idarea", "descripcion");
             ViewBag.cargo = new SelectList(_cargo.listado(), "idcargo", "descripcion");
             ViewBag.mensaje = _trabajador.UpdateTrabajador(reg);
