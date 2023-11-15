@@ -1,0 +1,24 @@
+﻿@model RopaStore.Domain.Entidad.Trabajador
+@{
+    ViewData["Title"] = "iniciarSesion";
+}
+
+<h1>Iniciar Sesión</h1>
+<form method="post" asp-action="iniciarSesion" asp-controller="Usuario" style="width:500px;">
+    <div class="mb-3 row">
+        <label for="floatingInput" class="col-sm-2 col-form-label">Correo</label>
+        <input type="text" class="form-control" required asp-for="correo"/>      
+    </div>
+    <div class="mb-3 row">
+        <label for="floatingInput" class="col-sm-2 col-form-label">Contraseña </label>
+        <input type="password" class="form-control" required asp-for="clave" />
+    </div>
+    <div class=" checkbox mb-3">
+        <label>
+            <input type="checkbox" asp-for="manteneractivo" />Recordar sesion
+        </label>
+    </div>
+    <button type="submit" class="btn btn-dark">Ingresar</button>
+    <label class="alert-danger">@ViewBag.Error</label>
+</form>
+

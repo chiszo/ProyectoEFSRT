@@ -1,10 +1,12 @@
 ﻿using EFSRT_RopaStore.Repositorio.Interface;
 using EFSRT_RopaStore.Repositorio.RepositorioSQL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RopaStore.Domain.Entidad;
 
 namespace EFSRT_RopaStore.Controllers
 {
+    [Authorize]
     public class ProveedorController : Controller
     {
         IProducto _producto;
