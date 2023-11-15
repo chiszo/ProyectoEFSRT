@@ -10,12 +10,20 @@ namespace EFSRT_RopaStore.Controllers
         IProducto _producto;
         ITrabajador _trabajador;
         IProveedor _proveedor;
+        ILote _lote;
+        ICargo _cargo;
+        ITipoprod _tipopro;
+        IArea _area;
 
         public ProveedorController()
         {
             _producto = new productoSQL();
             _proveedor = new proveedorSQL();
             _trabajador = new trabajadorSQL();
+            _area = new areaSQL();
+            _cargo = new cargoSQL();
+            _lote = new loteSQL();
+            _tipopro = new tipoproSQL();
         }
 
         public async Task<IActionResult> list(string nom = "")

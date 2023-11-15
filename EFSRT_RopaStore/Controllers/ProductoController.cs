@@ -11,12 +11,19 @@ namespace EFSRT_RopaStore.Controllers
         IProducto _producto;
         ITrabajador _trabajador;
         IProveedor _proveedor;
-
+        ILote _lote;
+        ICargo _cargo;
+        ITipoprod _tipopro;
+        IArea _area;
         public ProductoController()
         {
             _producto = new productoSQL();
             _proveedor = new proveedorSQL();
             _trabajador = new trabajadorSQL();
+            _area = new areaSQL();
+            _cargo = new cargoSQL();
+            _lote = new loteSQL();
+            _tipopro = new tipoproSQL();
         }
 
         public async Task<IActionResult> list(string nom = "")
@@ -30,6 +37,8 @@ namespace EFSRT_RopaStore.Controllers
 
         public async Task<IActionResult> Create()
         {
+            ViewBag.lote = new SelectList(_lote.listado(), "idlote", "descripcion");
+            ViewBag.tipopro = new SelectList(_tipopro.listado(),"idtipopro","descripcion");
             return View(await Task.Run(() => new Producto()));
         }
 
@@ -37,11 +46,15 @@ namespace EFSRT_RopaStore.Controllers
         public async Task<IActionResult> Create(Producto reg)
         {
             ViewBag.mensaje = _producto.InsertProductos(reg);
+            ViewBag.lote = new SelectList(_lote.listado(), "idlote", "descripcion");
+            ViewBag.tipopro = new SelectList(_tipopro.listado(), "idtipopro", "descripcion");
             return View(await Task.Run(() => reg));
         }
 
         public async Task<IActionResult> Edit(string id = "")
         {
+            ViewBag.lote = new SelectList(_lote.listado(), "idlote", "descripcion");
+            ViewBag.tipopro = new SelectList(_tipopro.listado(), "idtipopro", "descripcion");
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("list");
             Producto reg = _producto.GetProducto(id);
@@ -51,6 +64,8 @@ namespace EFSRT_RopaStore.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Producto reg)
         {
+            ViewBag.lote = new SelectList(_lote.listado(), "idlote", "descripcion");
+            ViewBag.tipopro = new SelectList(_tipopro.listado(), "idtipopro", "descripcion");
             ViewBag.mensaje = _producto.UpdateProductos(reg);
             return View(await Task.Run(() => reg));
 

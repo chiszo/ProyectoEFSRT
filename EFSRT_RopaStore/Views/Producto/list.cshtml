@@ -52,9 +52,9 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
                 @Html.DisplayFor(modelItem => item.idproducto)
             </td>
             <td>
@@ -85,8 +85,8 @@
                 @Html.DisplayFor(modelItem => item.estado)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.idproducto}) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.idproducto}, new { onclick = "return confirm('¿Está seguro que desea eliminar este registro?')" })
+                    @Html.ActionLink("Actualizar", "Edit", new { id=item.idproducto},new {@class="btn btn-secondary"}) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id=item.idproducto}, new { onclick = "return confirm('¿Está seguro que desea eliminar este registro?')" })
             </td>
         </tr>
 }

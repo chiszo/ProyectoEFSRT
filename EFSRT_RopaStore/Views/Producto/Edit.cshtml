@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="idtipopro" class="control-label"></label>
-                <input asp-for="idtipopro" class="form-control" />
+                <select asp-for="idtipopro" asp-items="ViewBag.tipopro" class="form-select"></select>
                 <span asp-validation-for="idtipopro" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -52,7 +52,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="idlote" class="control-label"></label>
-                <input asp-for="idlote" class="form-control" />
+                <select asp-for="idlote" asp-items="ViewBag.lote" class="form-select"></select>
                 <span asp-validation-for="idlote" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
@@ -62,8 +62,8 @@
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Actualizar" class="btn btn-default" onclick="return alert('Se ha actualizado un registro')" />
-                    @Html.ActionLink("Retornar", "list", null, new { @class = "btn btn-success" })
+                    <input type="submit" value="Actualizar" class="btn btn-secondary" onclick="return alert('Se ha actualizado un registro')" />
+                    @Html.ActionLink("Retornar", "list", null, new { @class = "btn btn-secondary" })
                 </div>
             </div>
         </form>

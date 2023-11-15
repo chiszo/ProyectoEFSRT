@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="idtipopro" class="control-label"></label>
-                <input asp-for="idtipopro" class="form-control" />
+                <select asp-for="idtipopro" asp-items="ViewBag.tipopro" class="form-select"></select>
                 <span asp-validation-for="idtipopro" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,7 +51,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="idlote" class="control-label"></label>
-                <input asp-for="idlote" class="form-control" />
+                <select asp-for="idlote" asp-items="ViewBag.lote" class="form-select"></select>
                 <span asp-validation-for="idlote" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
@@ -60,9 +60,9 @@
                 </label>
             </div>
             <div class="form-group">
-                <a asp-action="Create" class="btn btn-primary">Limpiar</a>
-                <input type="submit" value="Crear" class="btn btn-primary" />
-                <a asp-action="list" class="btn btn-success">Retornar</a>
+                <a asp-action="Create" class="btn btn-secondary">Limpiar</a>
+                <input type="submit" value="Crear" class="btn btn-secondary" />
+                <a asp-action="list" class="btn btn-secondary">Retornar</a>
             </div>
         </form>
     </div>

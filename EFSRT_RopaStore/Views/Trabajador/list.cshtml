@@ -83,8 +83,8 @@
                 @Html.DisplayFor(modelItem => item.clave)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.idtrabajador}) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.idtrabajador}, new { onclick = "return confirm('¿Está seguro que desea eliminar este registro?')" })
+                    @Html.ActionLink("Actualizar", "Edit", new { id=item.idtrabajador},new {@class="btn btn-secondary"}) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id=item.idtrabajador}, new { onclick = "return confirm('¿Está seguro que desea eliminar este registro?')" })
             </td>
         </tr>
 }
