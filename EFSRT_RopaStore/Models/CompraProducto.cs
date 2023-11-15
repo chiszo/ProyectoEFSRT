@@ -8,6 +8,7 @@ namespace RopaStore.Domain.Entidad
     public class CompraProducto
     {
         public string codcomprapro { get; set; }
+        public DateTime fechapedido { get; set; }
         public string idproveedor { get; set; }
         public decimal montoT { get; set; }
     }

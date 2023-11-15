@@ -1,11 +1,13 @@
 ﻿using EFSRT_RopaStore.Repositorio.Interface;
 using EFSRT_RopaStore.Repositorio.RepositorioSQL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RopaStore.Domain.Entidad;
 
 namespace EFSRT_RopaStore.Controllers
 {
+    [Authorize]
     public class TrabajadorController : Controller
     {
         IProducto _producto;
@@ -86,5 +88,6 @@ namespace EFSRT_RopaStore.Controllers
             _trabajador.DeleteTrabajador(_trabajador.GetTrabajador(id));
             return RedirectToAction("list");
         }
+
     }
 }
