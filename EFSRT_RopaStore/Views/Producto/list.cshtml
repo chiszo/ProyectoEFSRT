@@ -9,11 +9,11 @@
 <form>
     <em>Nombre a filtrar</em>
     @Html.TextBox("nom")
-    <button>Consultar</button>
+    <button class="btn btn-secondary">Consultar</button>
 </form>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+    <a asp-action="Create" class="btn btn-info">Nuevo</a>
 </p>
 <table class="table">
     <thead>
@@ -52,9 +52,9 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
                 @Html.DisplayFor(modelItem => item.idproducto)
             </td>
             <td>
@@ -85,10 +85,25 @@
                 @Html.DisplayFor(modelItem => item.estado)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.idproducto}) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.idproducto}, new { onclick = "return confirm('¿Está seguro que desea eliminar este registro?')" })
+                    @Html.ActionLink("Actualizar", "Edit", new { id=item.idproducto},new {@class="btn btn-secondary"}) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id=item.idproducto}, new { onclick = "return confirm('¿Está seguro que desea eliminar este registro?')" })
             </td>
         </tr>
 }
     </tbody>
 </table>
+<div>
+    @for (int i = 0; i < (int)ViewBag.pags; i++)
+    {
+        if ((int)ViewBag.p == i)
+        {
+            @Html.ActionLink((i+1).ToString(),"list",
+    new{p=i, y=ViewBag.y},new{@class="btn btn-info"})
+        }
+        else
+        {
+            @Html.ActionLink((i+1).ToString(),"list",
+    new{p=i, y=ViewBag.y},new{@class="btn btn-dark"})
+        }
+    }
+</div>

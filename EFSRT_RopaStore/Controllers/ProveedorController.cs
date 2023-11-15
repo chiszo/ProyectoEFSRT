@@ -10,21 +10,37 @@ namespace EFSRT_RopaStore.Controllers
         IProducto _producto;
         ITrabajador _trabajador;
         IProveedor _proveedor;
+        ILote _lote;
+        ICargo _cargo;
+        ITipoprod _tipopro;
+        IArea _area;
 
         public ProveedorController()
         {
             _producto = new productoSQL();
             _proveedor = new proveedorSQL();
             _trabajador = new trabajadorSQL();
+            _area = new areaSQL();
+            _cargo = new cargoSQL();
+            _lote = new loteSQL();
+            _tipopro = new tipoproSQL();
         }
 
-        public async Task<IActionResult> list(string nom = "")
+        public async Task<IActionResult> list(string nom = "", int p=0)
         {
             ViewBag.nom = nom;
+            IEnumerable<Proveedor> temporal = _proveedor.GetProveedores();
+            IEnumerable<Proveedor> temporal1 = _proveedor.GetProveedores(nom);
+            int f = 7;
+            int c = temporal.Count();
+            int pags = c % f == 0 ? c / f : c / f + 1;
+            ViewBag.p = p;
+            ViewBag.pags = pags;
             if (nom == null)
-                return View(await Task.Run(() => _proveedor.GetProveedores()));
-            else
-            return View(await Task.Run(() => _proveedor.GetProveedores(nom)));
+                return View(await Task.Run(() => temporal.Skip(f * p).Take(f)));
+
+            return View(await Task.Run(() => temporal1.Skip(f * p).Take(f)));
+
         }
 
 
