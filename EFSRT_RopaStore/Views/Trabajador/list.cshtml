@@ -42,7 +42,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.idarea)
-            </th
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -90,12 +90,12 @@
         if ((int)ViewBag.p == i)
         {
             @Html.ActionLink((i+1).ToString(),"list",
-    new{p=i, y=ViewBag.y},new{@class="btn btn-info"})
+    new{p=i, nom=ViewBag.nom},new{@class="btn btn-info"})
         }
         else
         {
             @Html.ActionLink((i+1).ToString(),"list",
-    new{p=i, y=ViewBag.y},new{@class="btn btn-dark"})
+    new{p=i, nom=ViewBag.nom},new{@class="btn btn-dark"})
         }
     }
 </div>

@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\cibertec V\Experiencias\Proyecto\EFSRT_RopaStore\EFSRT_RopaStore
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/cibertec V/Experiencias/Proyecto/EFSRT_RopaStore/EFSRT_RopaStore/Views/Comprar/list.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhclxsaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/cibertec V/Experiencias/Proyecto/EFSRT_RopaStore/EFSRT_RopaStore/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

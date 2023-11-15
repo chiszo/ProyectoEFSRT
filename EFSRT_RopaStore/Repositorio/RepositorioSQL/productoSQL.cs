@@ -150,5 +150,10 @@ namespace EFSRT_RopaStore.Repositorio.RepositorioSQL
             }
             return mensaje;
         }
+
+        public IEnumerable<Producto> GetProveedor(string idproveedor)
+        {
+            return GetProductos().Where(x => x.idproveedor.StartsWith(idproveedor, StringComparison.CurrentCultureIgnoreCase));
+        }
     }
 }
