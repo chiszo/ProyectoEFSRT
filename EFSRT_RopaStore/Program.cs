@@ -3,6 +3,10 @@ using EFSRT_RopaStore.Repositorio.RepositorioSQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSingleton<IProducto, productoSQL>();
+builder.Services.AddSingleton<IProveedor, proveedorSQL>();
+builder.Services.AddSingleton<ITrabajador, trabajadorSQL>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
