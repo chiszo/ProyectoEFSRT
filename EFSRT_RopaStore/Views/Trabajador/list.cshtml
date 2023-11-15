@@ -1,0 +1,92 @@
+﻿@model IEnumerable<RopaStore.Domain.Entidad.Trabajador>
+
+@{
+    ViewData["Title"] = "list";
+}
+
+<h1>Listado de trabajadores</h1>
+<form>
+    <em>Nombre a filtrar</em>
+    @Html.TextBox("nom")
+    <button>Consultar</button>
+</form>
+<p>
+    <a asp-action="Create">Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idtrabajador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dni)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idcargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idarea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clave)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idtrabajador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dni)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idcargo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idarea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.clave)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.idtrabajador}) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.idtrabajador}, new { onclick = "return confirm('¿Está seguro que desea eliminar este registro?')" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
