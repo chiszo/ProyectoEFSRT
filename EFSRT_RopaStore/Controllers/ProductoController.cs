@@ -26,13 +26,21 @@ namespace EFSRT_RopaStore.Controllers
             _tipopro = new tipoproSQL();
         }
 
-        public async Task<IActionResult> list(string nom = "")
+        public async Task<IActionResult> list(string nom = "", int p =0)
         {
             ViewBag.nom = nom;
 
+            IEnumerable<Producto> temporal = _producto.GetProductos();
+            IEnumerable<Producto> temporal1 = _producto.GetProductos(nom);
+            int f = 7;
+            int c = temporal.Count();
+            int pags = c % f == 0 ? c / f : c / f + 1;
+            ViewBag.p = p;
+            ViewBag.pags = pags;
             if (nom == null)
-                return View(await Task.Run(() => _producto.GetProductos()));
-            return View(await Task.Run(() => _producto.GetProductos(nom)));
+                return View(await Task.Run(() => temporal.Skip(f * p).Take(f)));
+
+            return View(await Task.Run(() => temporal1.Skip(f * p).Take(f)));
         }
 
         public async Task<IActionResult> Create()

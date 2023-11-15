@@ -72,3 +72,18 @@
 }
     </tbody>
 </table>
+<div>
+    @for (int i = 0; i < (int)ViewBag.pags; i++)
+    {
+        if ((int)ViewBag.p == i)
+        {
+            @Html.ActionLink((i+1).ToString(),"list",
+    new{p=i, y=ViewBag.y},new{@class="btn btn-info"})
+        }
+        else
+        {
+            @Html.ActionLink((i+1).ToString(),"list",
+    new{p=i, y=ViewBag.y},new{@class="btn btn-dark"})
+        }
+    }
+</div>
