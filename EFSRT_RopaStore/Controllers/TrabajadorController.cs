@@ -1,4 +1,5 @@
 ﻿using EFSRT_RopaStore.Repositorio.Interface;
+using EFSRT_RopaStore.Repositorio.RepositorioSQL;
 using Microsoft.AspNetCore.Mvc;
 using RopaStore.Domain.Entidad;
 
@@ -10,9 +11,15 @@ namespace EFSRT_RopaStore.Controllers
         ITrabajador _trabajador;
         IProveedor _proveedor;
 
+        public TrabajadorController()
+        {
+            _producto = new productoSQL();
+            _proveedor = new proveedorSQL();
+            _trabajador = new trabajadorSQL();
+        }
+
         public async Task<IActionResult> list(string nom = "")
         {
-            ViewBag.nom = nom;
             ViewBag.nom = nom;
 
             if (nom == null)

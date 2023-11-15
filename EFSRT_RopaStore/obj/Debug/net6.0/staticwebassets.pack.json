@@ -13,6 +13,18 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\cibertec V\\Experiencias\\Proyecto\\EFSRT_RopaStore\\EFSRT_RopaStore\\wwwroot\\imagenes\\background.png",
+      "PackagePath": "staticwebassets\\imagenes\\background.png"
+    },
+    {
+      "Id": "D:\\cibertec V\\Experiencias\\Proyecto\\EFSRT_RopaStore\\EFSRT_RopaStore\\wwwroot\\imagenes\\icono.png",
+      "PackagePath": "staticwebassets\\imagenes\\icono.png"
+    },
+    {
+      "Id": "D:\\cibertec V\\Experiencias\\Proyecto\\EFSRT_RopaStore\\EFSRT_RopaStore\\wwwroot\\imagenes\\logo.png",
+      "PackagePath": "staticwebassets\\imagenes\\logo.png"
+    },
+    {
       "Id": "D:\\cibertec V\\Experiencias\\Proyecto\\EFSRT_RopaStore\\EFSRT_RopaStore\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
