@@ -47,6 +47,7 @@ namespace EFSRT_RopaStore.Controllers
         {
             ViewBag.lote = new SelectList(_lote.listado(), "idlote", "descripcion");
             ViewBag.tipopro = new SelectList(_tipopro.listado(),"idtipopro","descripcion");
+            ViewBag.proveedor = new SelectList(_proveedor.GetProveedores(), "idproveedor", "empresa");
             return View(await Task.Run(() => new Producto()));
         }
 
@@ -56,6 +57,7 @@ namespace EFSRT_RopaStore.Controllers
             ViewBag.mensaje = _producto.InsertProductos(reg);
             ViewBag.lote = new SelectList(_lote.listado(), "idlote", "descripcion");
             ViewBag.tipopro = new SelectList(_tipopro.listado(), "idtipopro", "descripcion");
+            ViewBag.proveedor = new SelectList(_proveedor.GetProveedores(), "idproveedor", "empresa");
             return View(await Task.Run(() => reg));
         }
 
@@ -63,6 +65,7 @@ namespace EFSRT_RopaStore.Controllers
         {
             ViewBag.lote = new SelectList(_lote.listado(), "idlote", "descripcion");
             ViewBag.tipopro = new SelectList(_tipopro.listado(), "idtipopro", "descripcion");
+            ViewBag.proveedor = new SelectList(_proveedor.GetProveedores(), "idproveedor", "empresa");
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("list");
             Producto reg = _producto.GetProducto(id);
@@ -74,6 +77,7 @@ namespace EFSRT_RopaStore.Controllers
         {
             ViewBag.lote = new SelectList(_lote.listado(), "idlote", "descripcion");
             ViewBag.tipopro = new SelectList(_tipopro.listado(), "idtipopro", "descripcion");
+            ViewBag.proveedor = new SelectList(_proveedor.GetProveedores(), "idproveedor", "empresa");
             ViewBag.mensaje = _producto.UpdateProductos(reg);
             return View(await Task.Run(() => reg));
 

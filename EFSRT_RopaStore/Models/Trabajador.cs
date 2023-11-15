@@ -18,6 +18,6 @@ namespace RopaStore.Domain.Entidad
         [Required, Display(Name = "Direccion Trabajador")] public string direccion { get; set; }
         [Required, Display(Name = "Cargo")] public string idcargo { get; set; }
         [Required, Display(Name = "Area")] public string idarea { get; set; }
-        [Required, Display(Name = "Contraseña"), DataType(DataType.Password)] public string clave { get; set; }
+        [Required, Display(Name = "Contraseña")] public string clave { get; set; }
     }
 }
