@@ -175,7 +175,7 @@ namespace EFSRT_RopaStore.Controllers
                     temporal.ForEach(x =>
                     {
                         cmd = new SqlCommand(
-                        "update producto set cantidad-=@cant Where idproducto=@idproducto", cn, tr);
+                        "update producto set cantidad+=@cant Where idproducto=@idproducto", cn, tr);
                         cmd.Parameters.AddWithValue("@idproducto", x.idproducto);
                         cmd.Parameters.AddWithValue("@cantidad", x.cantidad);
                         cmd.ExecuteNonQuery();
