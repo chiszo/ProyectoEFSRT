@@ -11,6 +11,6 @@ namespace RopaStore.Domain.Entidad
         public string idproducto { get; set; }
         public decimal preciocompra { get; set; }
         public int cantidad { get; set; }
-        public decimal monto { get; set; }
+        public decimal monto { get { return preciocompra * cantidad; } }
     }
 }

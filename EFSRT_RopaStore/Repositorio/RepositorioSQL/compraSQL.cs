@@ -15,7 +15,7 @@ namespace EFSRT_RopaStore.Repositorio.RepositorioSQL
                 Build().GetConnectionString("sql");
         }
 
-        public string agregarComprobante(CompraProducto a, DetalleCompra b)
+        public string agregarComprobante(CompraProducto a, List<DetalleCompra>b)
         {
             string mensaje = "";
             using (SqlConnection cn = new SqlConnection(cadena))

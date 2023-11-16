@@ -2,6 +2,8 @@
 using EFSRT_RopaStore.Repositorio.RepositorioSQL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Win32;
+using Newtonsoft.Json;
 using RopaStore.Domain.Entidad;
 
 namespace EFSRT_RopaStore.Controllers
@@ -40,6 +42,11 @@ namespace EFSRT_RopaStore.Controllers
             int pags = c % f == 0 ? c / f : c / f + 1;
             ViewBag.p = p;
             ViewBag.pags = pags1;
+
+            if (HttpContext.Session.GetString("Canasta") == null)
+                HttpContext.Session.SetString("Canasta",
+                        JsonConvert.SerializeObject(new List<DetalleCompra>()));
+
             if (idproveedor == null)
             {
                 ViewBag.pags = pags;
@@ -47,6 +54,37 @@ namespace EFSRT_RopaStore.Controllers
             }
 
             return View(await Task.Run(() => temporal1.Skip(f * p).Take(f)));
+        }
+
+        public async Task<IActionResult> Detalle(string id = "")
+        {
+            Producto reg = _producto.GetProducto(id);
+            if (reg == null)
+                return RedirectToAction("list");
+            else
+                return View(await Task.Run(() => reg));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Detalle(string codigo, int cantidad)
+        {
+            Producto item = _producto.GetProducto(codigo);
+
+            DetalleCompra reg = new DetalleCompra()
+            {
+                idproducto = item.idproducto,
+                preciocompra = item.precio,
+                cantidad = cantidad
+            };
+
+            List<DetalleCompra> temporal = JsonConvert.DeserializeObject<List<DetalleCompra>>(HttpContext.Session.GetString("Canasta"));
+            temporal.Add(reg);
+
+            HttpContext.Session.SetString("Canasta", JsonConvert.SerializeObject(temporal));
+
+            ViewBag.mensaje = "Producto Agregado";
+
+            return View(await Task.Run(() => item));
         }
     }
 }
