@@ -8,9 +8,10 @@
     @Html.DropDownList("idproveedor", ViewBag.proveedor as SelectList, new {@class="btn btn-light dropdown-toggle"})
     <button class="btn btn-secondary">Consulta</button>
 </form>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<br />
+<a asp-action="Canasta" class="btn btn-info">Ir a la Canasta</a>
+<a asp-action="Comprar" class="btn btn-info">Ir a Comprar</a>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -81,7 +82,7 @@
                 @Html.DisplayFor(modelItem => item.estado)
             </td>
             <td>
-                    @Html.ActionLink("Agregar al carrito", "Detalle", new { id=item.idproducto }, new {@class="btn btn-primary"})
+                    @Html.ActionLink("Agregar al carrito", "Detalle", new { id=item.idproducto }, new {@class="btn btn-outline-dark"})
             </td>
         </tr>
 }

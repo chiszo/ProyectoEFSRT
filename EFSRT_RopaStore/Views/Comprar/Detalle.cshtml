@@ -16,6 +16,18 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.idproducto)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.cantidad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.precio)
         </dt>
@@ -26,14 +38,14 @@
     </dl>
 </div>
 <div>
-    <!--agregar un formulario para ingresar la cantidad de productos a solicitar-->
     <form asp-action="Detalle" method="post">
         @Html.Hidden("codigo",Model.idproducto)
         <em>Ingrese la cantidad</em>
         @Html.TextBox("cantidad",1,new{type="number",min=1,max=Model.cantidad})
         <br />
         <br />
-        <input type="submit" value="Agregar" class="btn btn-primary" onclick="" />
-        <a asp-action="list" class="btn btn-success">Ir a la tienda</a>
+        <input type="submit" value="Agregar" class="btn btn-info" onclick="" />
+        <a asp-action="list" class="btn btn-dark">Ir a la tienda</a>
     </form>
 </div>
+<div>@ViewBag.mensaje</div>
