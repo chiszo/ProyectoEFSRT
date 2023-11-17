@@ -1,0 +1,46 @@
+﻿@model RopaStore.Domain.Entidad.CompraProducto
+
+@{
+    ViewData["Title"] = "Pedido";
+}
+
+<h1>Pedido</h1>
+
+<h4>CompraProducto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Pedido">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="codcomprapro" class="control-label"></label>
+                <input asp-for="codcomprapro" class="form-control" />
+                <span asp-validation-for="codcomprapro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fechapedido" class="control-label"></label>
+                <input asp-for="fechapedido" class="form-control" />
+                <span asp-validation-for="fechapedido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idproveedor" class="control-label"></label>
+                <input asp-for="idproveedor" class="form-control" />
+                <span asp-validation-for="idproveedor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="montoT" class="control-label"></label>
+                <input asp-for="montoT" class="form-control" />
+                <span asp-validation-for="montoT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Registrar Pedido" class="btn btn-primary" />
+                <a asp-action="Canasta" class="btn btn-success">Seguir Comprando</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @ViewBag.mensaje
+</div>
+
