@@ -7,7 +7,7 @@
 <h1>Canasta</h1>
 
 <p>
-    <a asp-action="list" class="btn btn-info">Seguir Comprando</a>
+    @Html.ActionLink("Seguir comprando", "list", new{@ViewBag.idproveedor},new {@class="btn btn-info"})
     <a asp-action="Pedido" class="btn btn-dark">Registrar Pedido</a>
 </p>
 <table class="table">

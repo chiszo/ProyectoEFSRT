@@ -70,7 +70,7 @@ namespace EFSRT_RopaStore.Controllers
                                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(ci), p);
                                 return RedirectToAction("Index", "Home");
                             }
-                            else 
+                            else
                             {
                                 ViewBag.Error = "Credenciales incorrectas o cuenta no registrda";
                             }
@@ -88,11 +88,11 @@ namespace EFSRT_RopaStore.Controllers
             }
         }
 
-        [ResponseCache(Duration =0,Location =ResponseCacheLocation.None, NoStore =true)]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
-        { 
-            return View("Error","Home"); 
-        
+        {
+            return View("Error", "Home");
+
         }
     }
 }

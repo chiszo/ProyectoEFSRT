@@ -45,7 +45,7 @@
         <br />
         <br />
         <input type="submit" value="Agregar" class="btn btn-info" onclick="" />
-        <a asp-action="list" class="btn btn-dark">Ir a la tienda</a>
+        @Html.ActionLink("Regresar a la tienda", "list", new { idproveedor=Model.idproveedor}, new{@class="btn btn-dark"})
     </form>
 </div>
 <div>@ViewBag.mensaje</div>

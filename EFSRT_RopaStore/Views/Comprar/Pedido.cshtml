@@ -14,22 +14,20 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="codcomprapro" class="control-label"></label>
-                <input asp-for="codcomprapro" class="form-control" />
-                <span asp-validation-for="codcomprapro" class="text-danger"></span>
+                @Html.TextBox("idpedido",null,new{@class="form-control"})
             </div>
             <div class="form-group">
                 <label asp-for="fechapedido" class="control-label"></label>
-                <input asp-for="fechapedido" class="form-control" />
-                <span asp-validation-for="fechapedido" class="text-danger"></span>
+                <input asp-for="fechapedido" type="datetime-local" class="form-control" value="" />
             </div>
             <div class="form-group">
                 <label asp-for="idproveedor" class="control-label"></label>
-                <input asp-for="idproveedor" class="form-control" />
+                <input asp-for="idproveedor" value="@ViewBag.idproveedor" class="form-control" readonly />
                 <span asp-validation-for="idproveedor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="montoT" class="control-label"></label>
-                <input asp-for="montoT" class="form-control" />
+                <input asp-for="montoT" class="form-control" value="@ViewBag.suma" readonly />
                 <span asp-validation-for="montoT" class="text-danger"></span>
             </div>
             <div class="form-group">

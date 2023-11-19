@@ -1,0 +1,87 @@
+﻿@model IEnumerable<RopaStore.Domain.Entidad.Proveedor>
+
+@{
+    ViewData["Title"] = "listproveedor";
+}
+
+<h1>Lista de proveedores</h1>
+
+<form>
+    <em>Nombre a filtrar</em>
+    @Html.TextBox("idproveedor")
+    <button class="btn btn-secondary">Consultar</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idproveedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.empresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ruc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.representante)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idproveedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.empresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ruc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.representante)
+            </td>
+            <td>
+                    @Html.ActionLink("Escoger Proveedor", "list", new { idproveedor=item.idproveedor},new {@class="btn btn-outline-dark"})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    @for (int i = 0; i < (int)ViewBag.pags; i++)
+    {
+        if ((int)ViewBag.p == i)
+        {
+            @Html.ActionLink((i+1).ToString(),"listproveedor",
+    new{p=i, nom=ViewBag.nom},new{@class="btn btn-info"})
+        }
+        else
+        {
+            @Html.ActionLink((i+1).ToString(),"listproveedor",
+    new{p=i, nom=ViewBag.nom},new{@class="btn btn-dark"})
+        }
+    }
+</div>
+

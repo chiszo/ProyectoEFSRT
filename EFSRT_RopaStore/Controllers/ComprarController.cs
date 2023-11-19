@@ -6,9 +6,13 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using Newtonsoft.Json;
 using RopaStore.Domain.Entidad;
+using Microsoft.Win32;
+using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EFSRT_RopaStore.Controllers
 {
+    [Authorize]
     public class ComprarController : Controller
     {
         IProducto _producto;
@@ -19,7 +23,7 @@ namespace EFSRT_RopaStore.Controllers
         ITipoprod _tipopro;
         IArea _area;
         IConfiguration _config;
-  
+
 
         public ComprarController(IConfiguration config)
         {
@@ -32,10 +36,8 @@ namespace EFSRT_RopaStore.Controllers
             _lote = new loteSQL();
             _tipopro = new tipoproSQL();
         }
-        public async Task<IActionResult> list(string idproveedor = "", int p = 0)
+        public async Task<IActionResult> list(int p = 0,string idproveedor="")
         {
-            ViewBag.idproveedor= new SelectList(_proveedor.GetProveedores(), "idproveedor", "empresa",idproveedor);
-
             IEnumerable<Producto> temporal = _producto.GetProductos();
             IEnumerable<Producto> temporal1 = _producto.GetProveedor(idproveedor);
             int f = 7;
@@ -77,6 +79,7 @@ namespace EFSRT_RopaStore.Controllers
 
             DetalleCompra reg = new DetalleCompra()
             {
+                idproveedor=item.idproveedor,
                 idproducto = item.idproducto,
                 preciocompra = item.precio,
                 cantidad = cantidad
@@ -94,31 +97,30 @@ namespace EFSRT_RopaStore.Controllers
 
         public async Task<IActionResult> Canasta()
         {
+            string idproveedor = "";
             List<DetalleCompra> temporal = JsonConvert.DeserializeObject<List<DetalleCompra>>(
                         HttpContext.Session.GetString("Canasta"));
-
+            foreach (var item in temporal)
+            {
+                idproveedor = item.idproveedor;
+            }
+            ViewBag.idproveedor = idproveedor;
             return View(await Task.Run(() => temporal));
         }
 
         [HttpPost]
         public async Task<IActionResult> Canasta(string codigo, int cantidad)
         {
-            List<DetalleCompra> temporal = JsonConvert.DeserializeObject<List<DetalleCompra>>(
-                        HttpContext.Session.GetString("Canasta"));
-
-            Producto item = _producto.GetProducto(codigo);
-            DetalleCompra reg = temporal.Where(it => it.idproducto == codigo).First();
-            temporal.Remove(reg);
-            DetalleCompra regi = new DetalleCompra()
+            List<DetalleCompra> canasta = JsonConvert.DeserializeObject<List<DetalleCompra>>(HttpContext.Session.GetString("Canasta"));
+            DetalleCompra registro = canasta.FirstOrDefault(r => r.idproducto == codigo);
+            if (registro != null)
             {
-                idproducto = item.idproducto,
-                preciocompra = item.precio,
-                cantidad = cantidad
-            };
-
-            temporal.Add(regi);
-            HttpContext.Session.SetString("Canasta", JsonConvert.SerializeObject(temporal));
-            return View(await Task.Run(() => temporal));
+                registro.cantidad = cantidad;
+                string canastaJson = JsonConvert.SerializeObject(canasta);
+                HttpContext.Session.SetString("Canasta", canastaJson);
+            }
+            ViewBag.idproveedor = registro.idproveedor;
+            return RedirectToAction("Canasta");
         }
 
         public IActionResult Delete(string id)
@@ -137,12 +139,25 @@ namespace EFSRT_RopaStore.Controllers
 
         public async Task<IActionResult> Pedido()
         {
+            string idproveedor = "";
+            decimal monto = 0;
+            List<DetalleCompra> canasta = JsonConvert.DeserializeObject<List<DetalleCompra>>(HttpContext.Session.GetString("Canasta"));
+            foreach (var item in canasta)
+            {
+                monto += item.monto;
+                idproveedor=item.idproveedor;
+            }
+            ViewBag.suma = monto;
+            ViewBag.idproveedor = idproveedor;
             return View(await Task.Run(() => new CompraProducto()));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Pedido(string idpedido, CompraProducto reg)
+        public async Task<IActionResult> Pedido(CompraProducto reg, string idpedido = "")
         {
+            decimal monto = 0;
+            string idproveedor = "";
+            ViewBag.idproveedor = new SelectList(_proveedor.GetProveedores(), "idproveedor", "empresa");
             string mensaje = "";
             using (SqlConnection cn = new SqlConnection(_config["ConnectionStrings:sql"]))
             {
@@ -150,7 +165,7 @@ namespace EFSRT_RopaStore.Controllers
                 SqlTransaction tr = cn.BeginTransaction(IsolationLevel.Serializable);
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("sp_agregar_compra", cn);
+                    SqlCommand cmd = new SqlCommand("sp_agregar_compra", cn, tr);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@id", idpedido);
                     cmd.Parameters.AddWithValue("@fecha", reg.fechapedido);
@@ -162,20 +177,22 @@ namespace EFSRT_RopaStore.Controllers
                         HttpContext.Session.GetString("Canasta"));
                     temporal.ForEach(x =>
                     {
-                        SqlCommand cmd = new SqlCommand("sp_detalle_compra", cn);
+                        SqlCommand cmd = new SqlCommand("sp_detalle_compraa", cn,tr);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@id", idpedido);
                         cmd.Parameters.AddWithValue("@idproducto", x.idproducto);
                         cmd.Parameters.AddWithValue("@precio", x.preciocompra);
-                        cmd.Parameters.AddWithValue("@cant", x.cantidad);
+                        cmd.Parameters.AddWithValue("@cant", x.cantidad);                       
                         cmd.Parameters.AddWithValue("@montot", x.monto);
+                        monto += x.monto;
+                        idproveedor=x.idproveedor;
                         cmd.ExecuteNonQuery();
                     });
 
                     temporal.ForEach(x =>
                     {
                         cmd = new SqlCommand(
-                        "update producto set cantidad+=@cant Where idproducto=@idproducto", cn, tr);
+                        "update producto set cantidad+=@cantidad Where idproducto=@idproducto", cn, tr);
                         cmd.Parameters.AddWithValue("@idproducto", x.idproducto);
                         cmd.Parameters.AddWithValue("@cantidad", x.cantidad);
                         cmd.ExecuteNonQuery();
@@ -190,8 +207,27 @@ namespace EFSRT_RopaStore.Controllers
                 }
                 finally { cn.Close(); }
             }
+            ViewBag.idproveedor=idproveedor;
+            ViewBag.suma = monto;
             ViewBag.mensaje = mensaje;
             return View(await Task.Run(() => reg));
         }
+
+        public async Task<IActionResult> listproveedor(int p = 0, string idproveedor = "")
+        {
+            ViewBag.idproveedor = idproveedor;
+            IEnumerable<Proveedor> temporal = _proveedor.GetProveedores();
+            IEnumerable<Proveedor> temporal1 = _proveedor.GetProveedores(idproveedor);
+            int f = 7;
+            int c = temporal.Count();
+            int pags = c % f == 0 ? c / f : c / f + 1;
+            ViewBag.p = p;
+            ViewBag.pags = pags;
+            if (idproveedor == null)
+                return View(await Task.Run(() => temporal.Skip(f * p).Take(f)));
+
+            return View(await Task.Run(() => temporal1.Skip(f * p).Take(f)));
+        }
+
     }
 }
