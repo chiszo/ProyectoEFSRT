@@ -23,6 +23,7 @@ namespace EFSRT_RopaStore.Controllers
         ITipoprod _tipopro;
         IArea _area;
         IConfiguration _config;
+        IComprobante _comprobante;
 
 
         public ComprarController(IConfiguration config)
@@ -35,6 +36,7 @@ namespace EFSRT_RopaStore.Controllers
             _cargo = new cargoSQL();
             _lote = new loteSQL();
             _tipopro = new tipoproSQL();
+            _comprobante = new compraSQL();
         }
         public async Task<IActionResult> list(int p = 0,string idproveedor="")
         {
@@ -229,5 +231,16 @@ namespace EFSRT_RopaStore.Controllers
             return View(await Task.Run(() => temporal1.Skip(f * p).Take(f)));
         }
 
+        public async Task<IActionResult> listboleta()
+        {
+          
+            return View(await Task.Run(() => _comprobante.listado()));
+        }
+
+        public async Task<IActionResult> listdetalleboleta(string id = "")
+        {
+            IEnumerable<DetalleCompra> temporal1 = _comprobante.GetBoleta(id);
+            return View(await Task.Run(() => temporal1));
+        }
     }
 }

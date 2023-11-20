@@ -1,0 +1,45 @@
+﻿@model IEnumerable<RopaStore.Domain.Entidad.DetalleCompra>
+
+@{
+    ViewData["Title"] = "listdetalleboleta";
+}
+
+<h1>Detalle de la boleta</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idproducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.preciocompra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.monto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idproducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.preciocompra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.monto)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -32,15 +32,22 @@
                                 <li><a class="dropdown-item" asp-controller="Trabajador" asp-action="list">Trabajador</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Reportes</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Reporte
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Comprar" asp-action="listboleta">Compra</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" asp-controller="Baja" asp-action="list">Baja</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Transacciones
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="Comprar" asp-action="listproveedor">Ingreso</a></li>
+                                <li><a class="dropdown-item" asp-controller="Comprar" asp-action="listproveedor">Compra</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" asp-controller="Baja" asp-action="list">Baja</a></li>
                             </ul>

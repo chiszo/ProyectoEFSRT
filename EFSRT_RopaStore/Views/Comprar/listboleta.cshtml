@@ -1,0 +1,48 @@
+﻿@model IEnumerable<RopaStore.Domain.Entidad.CompraProducto>
+
+@{
+    ViewData["Title"] = "listboleta";
+}
+
+<h1>Listado de boleta</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.codcomprapro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechapedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idproveedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.montoT)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.codcomprapro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechapedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idproveedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.montoT)
+            </td>
+            <td>
+                    @Html.ActionLink("Seleccionar boleta", "listdetalleboleta", new { id=item.codcomprapro }, new {@class="btn btn-outline-dark"})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
